@@ -1,16 +1,18 @@
 <h1>Index des gossips </h1>
 
-        <%= link_to 'Créer un gossip', new_gossip_path, class:"btn btn-success" %>
+<%= link_to 'Créer un gossip', new_gossip_path, class:"btn btn-success" %>
+<br><br>
 
-  <div class="row">
-    <% @gossips.each do |gossip| %>
-      <div class="card col-lg-3" >
-        <div class="card-body">
-          <h5 class="card-title"> Gossip numéro : <%= gossip.id %>  </h5>
-          <h6 class="card-subtitle mb-2 text-muted"> Auteur : <%=gossip.anonymous_gossiper%> </h6>
-          <p class="card-text" > Contenu: <%= gossip.content %> </p>
-        </div>
-        <%= link_to 'Détails', gossip_path(gossip.id), class:"btn btn-link" %>
+<div class="row">
+  <% @gossips.each do |gossip| %>
+    <div class="card col-lg-3" >
+      <div class="card-body">
+        <h5 class="card-title"> Gossip numéro : <%= gossip.id %>  </h5>
+        <p> Nombre de commentaires : <%= gossip.comments.count %> </p>
+        <h6 class="card-subtitle mb-2 text-muted"> Auteur : <%=gossip.anonymous_gossiper%> </h6>
+        <p class="card-text" > Contenu: <%= gossip.content %> </p>
       </div>
-      <% end %>
-  </div>
+      <%= link_to 'Détails', gossip_path(gossip.id), class:"btn btn-link" %>
+    </div>
+  <% end %>
+</div>
