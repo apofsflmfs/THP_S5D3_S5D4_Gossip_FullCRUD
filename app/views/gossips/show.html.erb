@@ -1,14 +1,28 @@
-     
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title"> Gossip numéro : <%= @gossip.id %>  </h5>
-          <h6 class="card-subtitle mb-2 text-muted"> Contenu : </h6>
-          <p class="card-text" > <%= @gossip.content %> </p>
-        </div>
-      </div>
-        <br>
-        <button class="btn btn-outline-primary" href = "<%= edit_gossip_path(@gossip.id) %>"> Editer </button>
-        <a class="btn btn-secondary" href = "<%= gossips_path %>"> Index des gossips 
-        <%= link_to 'Clique pour détruire', @gossip, class:"btn btn-danger", data: {confirm: "êtes-vous sûr ?"}, method: :delete %>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"> Gossip numéro : <%= @gossip.id %>  </h5>
+    <h6 class="card-subtitle mb-2 text-muted"> Auteur : <%=@gossip.anonymous_gossiper%> </h6>
+    <p class="card-text" > Contenu : <%= @gossip.content %> </p>
+  </div>
+</div>
 
+<br>
+<%= link_to 'Editer', edit_gossip_path(@gossip.id), class:"btn btn-outline-primary"%>
+<%= link_to 'Détruire', @gossip, class:"btn btn-danger", data: {confirm: "êtes-vous sûr ?"}, method: :delete %>
+<%= link_to "Retour à l'index", gossips_path, class:"btn btn-secondary"%>
+<br>
+<br>
+<%= link_to "ajouter un commentaire", new_gossip_comment_path(@gossip.id), class:"btn btn-success"%>
+<br>
+<% @comments.each do |comment| %>
+  <hr>
+  <p>"<%=comment.content%>"</p>
+  <p>
+    <em>commenté par <%=comment.anonymous_commentor%></em>
+    <%= link_to "éditer", edit_gossip_comment_path(@gossip.id, comment.id), class:"btn btn-link"%>
+    <%= link_to 'Détruire', gossip_comment_path(@gossip.id, comment.id), class:"btn btn-danger", data: {confirm: "êtes-vous sûr ?"}, method: :delete %>
+  </p>
+  
+
+<%end%>
 

@@ -4,12 +4,13 @@ class GossipsController < ApplicationController
   end
 
   def create
-    gossip = Gossip.create(post_params)
+    gossip = Gossip.create(gossip_params)
     redirect_to(gossip_path(gossip.id))
   end
 
   def show
     @gossip = Gossip.find(params[:id])
+    @comments = @gossip.comments
   end
 
   def edit
@@ -18,7 +19,7 @@ class GossipsController < ApplicationController
 
   def update
     gossip = Gossip.find(params[:id])
-    gossip.update(post_params)
+    gossip.update(gossip_params)
     redirect_to(gossip_path(gossip.id))
   end
 
@@ -34,7 +35,7 @@ class GossipsController < ApplicationController
 
   private
 
-  def post_params
-    params.require(:gossip).permit(:content)
+  def gossip_params
+    params.require(:gossip).permit(:content, :anonymous_gossiper)
   end
 end

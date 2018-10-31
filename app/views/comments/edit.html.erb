@@ -1,0 +1,12 @@
+<h1>Editer le commentaire </h1>
+<%= form_for @comment, :url => gossip_comment_path do |f|%>
+  <div class="form-group col-md-6">
+    <label>Auteur</label>  
+    <%= f.text_field :anonymous_commentor, class: "form-control"%>
+    <label>Commentaire</label>  
+    <%= f.text_area :content, size: "20x3", class: "form-control"%>
+  </div>
+  <div class="form-group col-md-12">
+    <button type="submit" class="btn btn-primary">Editer le commentaire</button>
+  </div>
+<%end%>

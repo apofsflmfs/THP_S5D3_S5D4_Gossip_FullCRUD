@@ -1,11 +1,11 @@
 
+Comment.all.destroy_all
+Like.all.destroy_all
+PrivateMessage.all.destroy_all
+Tag.all.destroy_all
+Gossip.all.destroy_all
 User.all.destroy_all
 City.all.destroy_all
-Gossip.all.destroy_all
-Tag.all.destroy_all
-PrivateMessage.all.destroy_all
-Like.all.destroy_all
-Comment.all.destroy_all
 
 10.times do |c|
   City.create(name:Faker::Nation.capital_city, postal_code:rand(1000..9000))
@@ -16,7 +16,7 @@ end
 end
 
 20.times do |g|
-  Gossip.create(content:Faker::StarWars.quote, date:Faker::Date.backward(100), user_id:rand(User.first.id..User.last.id))
+  Gossip.create(content:Faker::StarWars.quote, date:Faker::Date.backward(100), user_id:rand(User.first.id..User.last.id), anonymous_gossiper: Faker::FunnyName.name)
 end
 
 10.times do |t|
@@ -39,7 +39,7 @@ end
 end
 
 40.times do |c|
-  Comment.create(content: Faker::StarWars.quote, user_id: rand(User.first.id..User.last.id), gossip_id: rand(Gossip.first.id..Gossip.last.id))
+  Comment.create(content: Faker::StarWars.quote, user_id: rand(User.first.id..User.last.id), gossip_id: rand(Gossip.first.id..Gossip.last.id), anonymous_commentor: Faker::FunnyName.name)
 end
 
 15.times do |l|
