@@ -9,18 +9,27 @@ class GossipsController < ApplicationController
   end
 
   def show
+    @gossip = Gossip.find(params[:id])
   end
 
   def edit
+    @gossip = Gossip.find(params[:id])
   end
 
   def update
+    gossip = Gossip.find(params[:id])
+    gossip.update(post_params)
+    redirect_to(gossip_path(gossip.id))
   end
 
   def index
+    @gossips = Gossip.all
   end
 
   def destroy
+    gossip = Gossip.find(params[:id])
+    gossip.destroy
+    redirect_to(gossips_path)
   end
 
   private

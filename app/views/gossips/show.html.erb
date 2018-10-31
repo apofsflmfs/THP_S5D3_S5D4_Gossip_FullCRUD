@@ -1,2 +1,14 @@
-<h1>Gossips#show</h1>
-<p>Find me in app/views/gossips/show.html.erb</p>
+     
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"> Gossip numéro : <%= @gossip.id %>  </h5>
+          <h6 class="card-subtitle mb-2 text-muted"> Contenu : </h6>
+          <p class="card-text" > <%= @gossip.content %> </p>
+        </div>
+      </div>
+        <br>
+        <button class="btn btn-outline-primary" href = "<%= edit_gossip_path(@gossip.id) %>"> Editer </button>
+        <a class="btn btn-secondary" href = "<%= gossips_path %>"> Index des gossips 
+        <%= link_to 'Clique pour détruire', @gossip, class:"btn btn-danger", data: {confirm: "êtes-vous sûr ?"}, method: :delete %>
+
+

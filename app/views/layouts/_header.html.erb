@@ -7,13 +7,13 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" <%= link_to "Accueil",root_path %><span class="sr-only">(current)</span></a>
+        <a class="nav-link" href = "<%= root_path %>"> Accueil <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" <%= link_to "Index des gossips", gossips_path %><span class="sr-only">(current)</span></a>
+        <a class="nav-link" href = "<%= gossips_path %>" > Index des gossips <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" <%= link_to "Nouveau gossip", new_gossip_path %><span class="sr-only">(current)</span></a>
+        <a class="nav-link" href = "<%= new_gossip_path %>"> Nouveau gossip <span class="sr-only">(current)</span></a>
       </li>
     </ul>
   </div>
