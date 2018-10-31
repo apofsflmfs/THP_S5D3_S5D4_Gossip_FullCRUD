@@ -1,24 +1,8 @@
-# README
+# The Gossip Project - THP  
+Semaine 5, mercredi
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Auteurs
+Clément Baldy et David Gérard
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Heroku
+dispo sur http://the-crud-gossip-project.herokuapp.com/gossips
