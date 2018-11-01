@@ -16,7 +16,7 @@ end
 end
 
 20.times do |g|
-  Gossip.create(content:Faker::StarWars.quote, date:Faker::Date.backward(100), user_id:rand(User.first.id..User.last.id), anonymous_gossiper: Faker::FunnyName.name)
+  Gossip.create(content:Faker::StarWars.quote, date:Faker::Date.backward(100), user_id:rand(User.first.id..User.last.id))
 end
 
 10.times do |t|
@@ -39,7 +39,8 @@ end
 end
 
 40.times do |c|
-  Comment.create(content: Faker::StarWars.quote, user_id: rand(User.first.id..User.last.id), gossip_id: rand(Gossip.first.id..Gossip.last.id), anonymous_commentor: Faker::FunnyName.name)
+  Comment.create(content: Faker::StarWars.quote, user_id: rand(User.first.id..User.last.id), commentable_type: "Gossip", commentable_id: rand(Gossip.first.id..Gossip.last.id), anonymous_commentor: Faker::FunnyName.name)
+  Comment.create(content: Faker::StarWars.quote, user_id: rand(User.first.id..User.last.id), commentable_type: "Comment", commentable_id: rand(Comment.first.id..Comment.last.id))
 end
 
 15.times do |l|

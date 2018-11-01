@@ -7,17 +7,44 @@
   <% @gossips.each do |gossip| %>
     <div class="card col-lg-3" >
       <div class="card-body">
-        <h5 class="card-title"> Gossip numéro : <%= gossip.id %>  </h5>
+        <div style="diplay: flex">
+          <h5 class="card-title"> 
+            Gossip numéro : <%= gossip.id %>  
+          </h5>
+        </div>
         <h6 class="card-subtitle mb-2 text-muted"> Auteur : <%=gossip.user.first_name%> (<%=gossip.user.email%>) </h6>
         <p class="card-text" > Contenu: <%= gossip.content %> </p>
       </div>
       <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-2">
           <%= link_to 'Détails', gossip_path(gossip.id), class:"btn btn-link" %>
         </div>
-        <div class="col-lg-8">
-          <p> Nbr de com': <%= gossip.comments.count %> </p>
+        <div class="col-lg-4">
         </div>
+        <div class="col-lg-3">
+          <p> 
+            <%= gossip.comments.count %> 
+            <%= image_tag("comment-png-17.png", :alt => "commentaires", :style => "width: 30px;") %>
+          </p>
+        </div>
+        <div class="col-lg-3">
+          <p> 
+            <%= gossip.likes.count %> 
+            <% if @current_user == nil%>
+              <%= image_tag("Facebook-Like-grey.png", :alt => "likes", :style => "width: 30px;") %>
+            <% elsif gossip.likes.where(user_id: @current_user.id).first%>
+              <a href="/gossips/<%= gossip.id %>/like/destroy">
+                <%= image_tag("Facebook-Like.png", :alt => "likes", :style => "width: 30px;") %>
+              </a>
+            <% else%>
+              <a href="/gossips/<%= gossip.id %>/like/create">
+                <%= image_tag("Facebook-Like-grey.png", :alt => "likes", :style => "width: 30px;") %>
+              </a> 
+            <% end %>
+
+          </p>
+        </div>
+
       </div>
     </div>
   <% end %>

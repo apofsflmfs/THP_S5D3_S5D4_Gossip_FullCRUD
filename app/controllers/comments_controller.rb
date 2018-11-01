@@ -7,8 +7,19 @@ class CommentsController < ApplicationController
   end
 
   def create
-    comment = Comment.create(comment_params)
-    redirect_to(gossip_path(params[:gossip_id]))
+    result = comment_params
+    if params[:gossip_id]
+      
+      result[:commentable_type] = "Gossip"
+      result[:commentable_id] = params[:gossip_id]
+      comment = Comment.create(result)
+      redirect_to(gossip_path(params[:gossip_id]))
+    else
+      result[:commentable_type] = "Comment"
+      result[:commentable_id] = params[:comment_id]
+      comment = Comment.create(result)
+      redirect_to(gossip_path(Comment.find(params[:comment_id]).commentable_id))
+    end
   end
 
   def edit
@@ -31,7 +42,6 @@ class CommentsController < ApplicationController
 
   def comment_params
     result = params.require(:comment).permit(:content)
-    result[:gossip_id] = params[:gossip_id]
     result[:user_id] = @current_user.id
     return result
   end

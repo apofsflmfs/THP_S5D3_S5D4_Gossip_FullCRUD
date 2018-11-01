@@ -4,6 +4,33 @@
     <h6 class="card-subtitle mb-2 text-muted"> Auteur : <%=@gossip.user.first_name%> (<%=@gossip.user.email%>) </h6>
     <p class="card-text" > Contenu : <%= @gossip.content %> </p>
   </div>
+  <div class="row">
+    <div class="col-lg-6">
+    </div>
+    <div class="col-lg-3">
+      <p> 
+        <%= @gossip.comments.count %> 
+        <%= image_tag("comment-png-17.png", :alt => "commentaires", :style => "width: 30px;") %>
+      </p>
+    </div>
+    <div class="col-lg-3">
+      <p> 
+        <%= @gossip.likes.count %> 
+        <% if @current_user == nil%>
+          <%= image_tag("Facebook-Like-grey.png", :alt => "likes", :style => "width: 30px;") %>
+        <% elsif @gossip.likes.where(user_id: @current_user.id).first%>
+          <a href="/gossips/<%= @gossip.id %>/like/destroy">
+            <%= image_tag("Facebook-Like.png", :alt => "likes", :style => "width: 30px;") %>
+          </a>
+        <% else%>
+          <a href="/gossips/<%= @gossip.id %>/like/create">
+            <%= image_tag("Facebook-Like-grey.png", :alt => "likes", :style => "width: 30px;") %>
+          </a> 
+        <% end %>
+
+      </p>
+    </div>
+  </div>
 </div>
 
 <br>
@@ -16,16 +43,49 @@
 <br>
 <%= link_to "ajouter un commentaire", new_gossip_comment_path(@gossip.id), class:"btn btn-success"%>
 <br>
+
 <% @comments.each do |comment| %>
   <hr>
   <p>"<%=comment.content%>"</p>
   <p>
     <em>commenté par <%=comment.user.first_name%> (<%=comment.user.email%>)</em>
-    <%if @current_user == comment.user %>
-      <%= link_to "éditer", edit_gossip_comment_path(@gossip.id, comment.id), class:"btn btn-link"%>
-      <%= link_to 'Détruire', gossip_comment_path(@gossip.id, comment.id), class:"btn btn-danger", data: {confirm: "êtes-vous sûr ?"}, method: :delete %>
-    <%end%>
+
+    <div class="row">
+      <div class="col-lg-2">
+        <%if @current_user == comment.user %>
+          <%= link_to "éditer", edit_gossip_comment_path(@gossip.id, comment.id), class:"btn btn-link"%>
+          <%= link_to 'Détruire', gossip_comment_path(@gossip.id, comment.id), class:"btn btn-danger", data: {confirm: "êtes-vous sûr ?"}, method: :delete %>
+        <%end%>
+      </div>
+      
+      <% com_com = Comment.new %>
+      <div class="col-lg-10">
+        
+        <%= form_for com_com, :url => comment_comments_path(comment.id) do |f|%>
+          <div class="form-row">
+            <div class="col">
+              <%= f.text_field :content, class: "form-control", placeholder: "répondez au commentaire" %>
+            </div>
+            <div class="col">
+              <button type="submit" class="btn btn-primary">Commenter</button>
+            </div>
+          </div>
+        <%end%>
+        
+      </div>
+
+    </div>
   </p>
+
+  <% comment.comments.each do |com_com| %>
+    <hr>
+    <div style="margin-left: 50px">
+      <p>"<%=com_com.content%>"</p>
+      <p>
+        <em>commenté par <%=com_com.user.first_name%> (<%=com_com.user.email%>)</em>
+      </p>
+    </div>
+  <%end%>
   
 
 <%end%>
