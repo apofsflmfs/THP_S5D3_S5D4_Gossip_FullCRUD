@@ -1,6 +1,9 @@
 class GossipsController < ApplicationController
   def new
     @gossip = Gossip.new
+    unless @current_user
+      redirect_to(not_connected)
+    end
   end
 
   def create
@@ -38,4 +41,6 @@ class GossipsController < ApplicationController
   def gossip_params
     params.require(:gossip).permit(:content, :anonymous_gossiper)
   end
+
+
 end

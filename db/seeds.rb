@@ -12,7 +12,7 @@ City.all.destroy_all
 end
 
 10.times do |n|
-   User.create(first_name:Faker::FunnyName.name, last_name: Faker::FunnyName.name, description: Faker::StarWars.quote, email: Faker::Internet.email, age: rand(18..65), city_id:rand(City.first.id..City.last.id))
+   User.create(first_name:Faker::FunnyName.name, last_name: Faker::FunnyName.name, description: Faker::StarWars.quote, email: Faker::Internet.email, age: rand(18..65), city_id:rand(City.first.id..City.last.id), password: "azerty#{rand(1..9)}")
 end
 
 20.times do |g|
