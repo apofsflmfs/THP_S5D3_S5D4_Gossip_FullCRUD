@@ -8,11 +8,17 @@
     <div class="card col-lg-3" >
       <div class="card-body">
         <h5 class="card-title"> Gossip numéro : <%= gossip.id %>  </h5>
-        <p> Nombre de commentaires : <%= gossip.comments.count %> </p>
-        <h6 class="card-subtitle mb-2 text-muted"> Auteur : <%=gossip.anonymous_gossiper%> </h6>
+        <h6 class="card-subtitle mb-2 text-muted"> Auteur : <%=gossip.user.first_name%> (<%=gossip.user.email%>) </h6>
         <p class="card-text" > Contenu: <%= gossip.content %> </p>
       </div>
-      <%= link_to 'Détails', gossip_path(gossip.id), class:"btn btn-link" %>
+      <div class="row">
+        <div class="col-lg-4">
+          <%= link_to 'Détails', gossip_path(gossip.id), class:"btn btn-link" %>
+        </div>
+        <div class="col-lg-8">
+          <p> Nbr de com': <%= gossip.comments.count %> </p>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>

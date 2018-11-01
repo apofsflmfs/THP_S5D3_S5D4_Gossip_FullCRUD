@@ -1,12 +1,13 @@
 class CommentsController < ApplicationController
   def new
     @comment = Comment.new
+    unless @current_user
+      redirect_to(not_connected_path)
+    end
   end
 
   def create
-    puts "ceci est le hash des params #{comment_params}"
     comment = Comment.create(comment_params)
-    puts "ceci est le commentaire #{comment}"
     redirect_to(gossip_path(params[:gossip_id]))
   end
 
@@ -29,8 +30,9 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    result = params.require(:comment).permit(:anonymous_commentor, :content)
+    result = params.require(:comment).permit(:content)
     result[:gossip_id] = params[:gossip_id]
+    result[:user_id] = @current_user.id
     return result
   end
 end

@@ -39,7 +39,9 @@ class GossipsController < ApplicationController
   private
 
   def gossip_params
-    params.require(:gossip).permit(:content, :anonymous_gossiper)
+    result = params.require(:gossip).permit(:content)
+    result[:user_id] = @current_user.id
+    return result
   end
 
 

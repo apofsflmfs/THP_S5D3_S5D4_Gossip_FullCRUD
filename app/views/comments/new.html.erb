@@ -1,8 +1,6 @@
 <h1>Création d'un commentaire</h1>
 <%= form_for @comment, :url => gossip_comments_path do |f|%>
   <div class="form-group col-md-6">
-    <label>Auteur</label>  
-    <%= f.text_field :anonymous_commentor, class: "form-control", placeholder: "Saisissez ici votre nom" %>
     <label>Commentaire</label>  
     <%= f.text_area :content, size: "20x3", class: "form-control", placeholder: "Saisissez ici votre commentaire" %>
   </div>
