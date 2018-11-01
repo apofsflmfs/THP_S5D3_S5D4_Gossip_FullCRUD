@@ -2,7 +2,7 @@ class GossipsController < ApplicationController
   def new
     @gossip = Gossip.new
     unless @current_user
-      redirect_to(not_connected)
+      redirect_to(not_connected_path)
     end
   end
 
