@@ -6,7 +6,7 @@ class RegistrationController < ApplicationController
     @user_current = User.where(email: params[:email], password: params[:password]).first
     ApplicationController.set_session(@user_current)
     if @user_current
-      redirect_to(root_path)
+      redirect_to(gossips_path)
     else
       redirect_to(invalid_login_password_path)
     end

@@ -32,13 +32,13 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     @comment.update(comment_params)
-    redirect_to(gossip_path(@comment.gossip_id))
+    redirect_to(gossip_path(params[:gossip_id]))
   end
 
   def destroy
     comment = Comment.find(params[:id])
     comment.destroy
-    redirect_to(gossip_path(comment.gossip_id))
+    redirect_to(gossip_path(params[:gossip_id]))
   end
 
   private
