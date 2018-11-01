@@ -1,5 +1,5 @@
 # The Gossip Project - THP  
-Semaine 5, mercredi
+Semaine 5, jeudi
 
 ## Auteurs
 Clément Baldy et David Gérard
