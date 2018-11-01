@@ -10,4 +10,6 @@ class StaticPagesController < ApplicationController
   def not_connected
   end
 
+  def invalid_login_pasword
+  end
 end

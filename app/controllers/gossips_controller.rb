@@ -18,6 +18,9 @@ class GossipsController < ApplicationController
 
   def edit
     @gossip = Gossip.find(params[:id])
+    unless @current_user == @gossip.user 
+      redirect_to(not_connected_path)
+    end
   end
 
   def update

@@ -1,8 +1,8 @@
 <div class="card" style="width: 30rem;">
   <div class="card-body">
     <h5 class="card-title"> Gossip numéro : <%= @gossip.id %>  </h5>
-    <h6 class="card-subtitle mb-2 text-muted"> Auteur : <%=@gossip.user.first_name%> (<%=@gossip.user.email%>) </h6>
-    <p class="card-text" > Contenu : <%= @gossip.content %> </p>
+    <h6 class="card-subtitle mb-2 text-muted"> <strong>Auteur</strong> : <%=@gossip.user.first_name%> (<%=@gossip.user.email%>) </h6>
+    <p class="card-text" > <strong>Contenu</strong> : <%= @gossip.content %> </p>
   </div>
   <div class="row">
     <div class="col-lg-6">
@@ -39,8 +39,6 @@
   <%= link_to 'Détruire', @gossip, class:"btn btn-danger", data: {confirm: "êtes-vous sûr ?"}, method: :delete %>
 <%end%>
 <%= link_to "Retour à l'index", gossips_path, class:"btn btn-secondary"%>
-<br>
-<br>
 <%= link_to "ajouter un commentaire", new_gossip_comment_path(@gossip.id), class:"btn btn-success"%>
 <br>
 
@@ -57,29 +55,29 @@
           <%= link_to 'Détruire', gossip_comment_path(@gossip.id, comment.id), class:"btn btn-danger", data: {confirm: "êtes-vous sûr ?"}, method: :delete %>
         <%end%>
       </div>
-      
-      <% com_com = Comment.new %>
-      <div class="col-lg-10">
-        
-        <%= form_for com_com, :url => comment_comments_path(comment.id) do |f|%>
-          <div class="form-row">
-            <div class="col">
-              <%= f.text_field :content, class: "form-control", placeholder: "répondez au commentaire" %>
+      <%if @current_user%>
+        <% com_com = Comment.new %>
+        <div class="col-lg-10">
+          
+          <%= form_for com_com, :url => comment_comments_path(comment.id) do |f|%>
+            <div class="form-row">
+              <div class="col">
+                <%= f.text_field :content, class: "form-control", placeholder: "répondez au commentaire" %>
+              </div>
+              <div class="col">
+                <button type="submit" class="btn btn-primary">Commenter</button>
+              </div>
             </div>
-            <div class="col">
-              <button type="submit" class="btn btn-primary">Commenter</button>
-            </div>
-          </div>
-        <%end%>
-        
-      </div>
-
+          <%end%>
+          
+        </div>
+      <%end%>
     </div>
   </p>
 
   <% comment.comments.each do |com_com| %>
     <hr>
-    <div style="margin-left: 50px">
+    <div style="margin-left: 80px">
       <p>"<%=com_com.content%>"</p>
       <p>
         <em>commenté par <%=com_com.user.first_name%> (<%=com_com.user.email%>)</em>

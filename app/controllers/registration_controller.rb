@@ -5,7 +5,11 @@ class RegistrationController < ApplicationController
   def create
     @user_current = User.where(email: params[:email], password: params[:password]).first
     ApplicationController.set_session(@user_current)
-    redirect_to(root_path)
+    if @user_current
+      redirect_to(root_path)
+    else
+      redirect_to(invalid_login_password_path)
+    end
   end
 
   def logout

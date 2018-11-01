@@ -23,6 +23,9 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    unless @current_user
+      redirect_to(not_connected_path)
+    end
     @comment = Comment.find(params[:id])
   end
 
@@ -41,6 +44,9 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
+    unless @current_user
+      redirect_to(not_connected_path)
+    end
     result = params.require(:comment).permit(:content)
     result[:user_id] = @current_user.id
     return result

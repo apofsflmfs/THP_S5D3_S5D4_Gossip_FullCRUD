@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'registration/new'
   get '/logout', to: 'registration#logout'
   get '/not_connected', to: 'static_pages#not_connected'
+  get '/invalid_login_password', to: 'static_pages#invalid_login_password'
   post 'registration/create'
   root 'static_pages#home'
   resources :users, only: [:index, :new, :create]
