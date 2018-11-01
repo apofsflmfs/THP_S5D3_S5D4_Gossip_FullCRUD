@@ -13,7 +13,7 @@ class GossipsController < ApplicationController
 
   def show
     @gossip = Gossip.find(params[:id])
-    @comments = @gossip.comments
+    @comments = @gossip.comments.order(:created_at)
   end
 
   def edit
